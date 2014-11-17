@@ -1,0 +1,47 @@
+FROM ubuntu:14.10
+MAINTAINER Greg Daues
+
+RUN apt-get update && \
+  /bin/bash && \
+  apt-get -qy  install apt-utils && \
+  apt-get -qy  install libterm-readline-perl-perl  && \
+  apt-get -qy  install  gcc-4.4 && \
+  apt-get -qy  install  g++-4.4 && \
+  apt-get -qy  install  gettext && \
+  apt-get -qy  install  flex && \
+  apt-get -qy  install  bison && \
+  apt-get -qy  install zlibc && \
+  apt-get -qy  install zlib1g && \
+  apt-get -qy  install zlib1g-dev && \
+  apt-get -qy  install bzip2 && \
+  apt-get -qy  install libbz2-dev && \
+  apt-get -qy  install libncurses5 && \
+  apt-get -qy  install libncurses5-dev && \
+  apt-get -qy  install libxt6 && \
+  apt-get -qy  install libxt-dev && \
+  apt-get -qy  install libreadline6 && \
+  apt-get -qy  install libreadline-dev && \
+  apt-get -qy  install patch && \
+  apt-get -qy  install openssl && \
+  apt-get -qy  install python && \
+  apt-get -qy  install vim && \
+  apt-get -qy  install make && \
+  apt-get -qy  install libmodule-build-perl && \
+  cd /usr/bin && \
+  ln -s cpp-4.4 cpp && \
+  ln -s gcov-4.4 gcov && \
+  ln -s gcc-4.4  gcc && \
+  ln -s  g++-4.4 g++ && \
+  ln -s gcc  cc && \
+  ln -s g++  c++ && \
+  cd /usr/local && \
+  mkdir lsst && \
+  mkdir lsst/lsst_home && \
+  cd  lsst/lsst_home && \
+  curl -O http://sw.lsstcorp.org/eupspkg/newinstall.sh && \
+  echo yes > /tmp/input1 && \
+  echo yes >> /tmp/input1 && \
+  /bin/bash newinstall.sh < /tmp/input1  && \
+  /bin/bash -c 'source "/usr/local/lsst/lsst_home/loadLSST.sh"; eups list; export EUPSPKG_NJOBS=1; eups distrib install -t v9_2 lsst_apps; eups list'
+
+
