@@ -1,5 +1,0 @@
-FROM daues/lsstdistrib:lsstapps_v9_2bld_ubuntu14.10_gcc44
-MAINTAINER Greg Daues
-
-RUN /bin/bash -c 'source "/usr/local/lsst/lsst_home/loadLSST.sh"; eups list; export EUPSPKG_NJOBS=1; eups distrib install -t v9_2 lsst_distrib; eups list'
-
